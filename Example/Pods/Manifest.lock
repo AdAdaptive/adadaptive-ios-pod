@@ -1,5 +1,10 @@
 PODS:
-  - AdAdaptive (0.1.0)
+  - AdAdaptive (0.1.0):
+    - Alamofire (~> 4.3)
+    - AlamofireImage (~> 3.1)
+  - Alamofire (4.3.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
@@ -16,6 +21,8 @@ PODS:
 
 DEPENDENCIES:
   - AdAdaptive (from `../`)
+  - Alamofire (~> 4.3)
+  - AlamofireImage (~> 3.1)
   - FBSnapshotTestCase
   - Nimble (~> 5.1.1)
   - Nimble-Snapshots
@@ -26,12 +33,14 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AdAdaptive: e83fe8d63d5760a75b2f9feebe71c81b9247712f
+  AdAdaptive: 298e88e34a1229e6368adb86aca79ef4032fcc37
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
 
-PODFILE CHECKSUM: 7a0e1277d403ebe6fed61bd72c5a7c6caac54fba
+PODFILE CHECKSUM: 462c9ffb834bd7fe23723bb790baa0bbde211198
 
 COCOAPODS: 1.2.0
