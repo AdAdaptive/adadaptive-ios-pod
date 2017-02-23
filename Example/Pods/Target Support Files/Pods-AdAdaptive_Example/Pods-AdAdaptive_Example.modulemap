@@ -1,0 +1,6 @@
+framework module Pods_AdAdaptive_Example {
+  umbrella header "Pods-AdAdaptive_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

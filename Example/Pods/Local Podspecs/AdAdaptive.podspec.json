@@ -1,0 +1,22 @@
+{
+  "name": "AdAdaptive",
+  "version": "0.1.0",
+  "summary": "A short description of AdAdaptive.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/peterbunus/AdAdaptive",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "peterbunus": "peter.bunus@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/peterbunus/AdAdaptive.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "AdAdaptive/Classes/**/*"
+}

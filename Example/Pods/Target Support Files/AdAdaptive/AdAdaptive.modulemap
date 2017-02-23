@@ -1,0 +1,6 @@
+framework module AdAdaptive {
+  umbrella header "AdAdaptive-umbrella.h"
+
+  export *
+  module * { export * }
+}
