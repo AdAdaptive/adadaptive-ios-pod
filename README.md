@@ -28,6 +28,13 @@ it, simply add the following line to your Podfile:
 pod "AdAdaptive"
 ```
 
+## Release History
+### 0.1.1
+* Updates related to Interstitial ads
+### 0.1.0
+* Initial SDK functionality including Banner, Interstitial and Category based ads
+
+
 ## Author
 
 AdAdaptive, info@adadaptive.com

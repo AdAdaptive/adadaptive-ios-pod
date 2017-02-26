@@ -13,41 +13,35 @@ import Alamofire
 import AlamofireImage
 import CoreLocation
 
-protocol AdAdaptiveInterstitialDelegate: class {
+public protocol AdAdaptiveInterstitialDelegate: class {
     func interstitialAdDidFinishLoad(controller:AdAdaptiveInterstitial)
     func interstitialAdDismissed(controller: AdAdaptiveInterstitial)
 }
 
-
-class AdAdaptiveInterstitial: UIViewController {
+open class AdAdaptiveInterstitial: UIViewController {
     
     var MY_AD_PLATFORM = AD_PLATFORM()
     
-    var delegate:AdAdaptiveInterstitialDelegate?
+    public var delegate:AdAdaptiveInterstitialDelegate?
     
-    //fileprivate let ad_request_url_str = MY_AD_PLATFORM.AD
     fileprivate let deviceData = AdAdaptiveDeviceData()
     fileprivate var ad_action: URL? = nil
-    var isReady: Bool = false
 
     @IBOutlet weak var adImage:     UIImageView!
     @IBOutlet weak var closeBtn:    UIButton!
     @IBAction func functionDismissAd(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
         self.delegate?.interstitialAdDismissed(controller: self)
-        debugPrint("AdAdaptive Info: Interstitial AD dismissed")
+        //debugPrint("AdAdaptive Info: Interstitial AD dismissed")
     }
     
     //----------------------------------------------------------------------------------------------------------------------------------//
     fileprivate func configure_tap_gestures(){
-        //let tapGesture = UITapGestureRecognizer(target:self, action:#selector(UIImageView.respondToTapGesture(_:)))
         let tapGesture = UITapGestureRecognizer(target:self, action: #selector(self.respondToTapGesture(_:)))
         view.addGestureRecognizer(tapGesture)
     }
     //----------------------------------------------------------------------------------------------------------------------------------//
     @objc fileprivate func respondToTapGesture(_ gesture: UIGestureRecognizer){
-        debugPrint("AdAdaptive Info: Tapped on the AD")
-        //UIApplication.sharedApplication().openURL(NSURL(string: "http://www.AdAdaptive.se")!)
         if self.ad_action != nil {
             let options = [UIApplicationOpenURLOptionUniversalLinksOnly : false]
             UIApplication.shared.open(ad_action!, options: options, completionHandler: nil)
@@ -56,9 +50,8 @@ class AdAdaptiveInterstitial: UIViewController {
     //***********************************************************************************************************************************/
     // Init functions
     //***********************************************************************************************************************************/
-    convenience init(publisherID: String, appID: String){
-        debugPrint("AdAdaptive Info: Called init")
-        self.init(nibName: "AdAdaptiveInterstitial", bundle: nil)
+    public convenience init(publisherID: String, appID: String){
+        self.init(nibName: "AdAdaptiveInterstitial", bundle: Bundle(for: AdAdaptiveInterstitial.self))
         self.modalTransitionStyle = UIModalTransitionStyle.partialCurl
         deviceData.setPublisherID(publisherID: publisherID)
         deviceData.setAppID(appID: appID)
@@ -73,19 +66,17 @@ class AdAdaptiveInterstitial: UIViewController {
     }
     
 
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         // create a rounded dismiss button at the right upper corner of the interstitial ad
         closeBtn.backgroundColor = UIColor.black
         closeBtn.layer.cornerRadius = closeBtn.frame.size.width/2
         closeBtn.layer.borderWidth = 2
         closeBtn.layer.borderColor = UIColor.white.cgColor
-
     }
 
-    override func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -99,15 +90,16 @@ class AdAdaptiveInterstitial: UIViewController {
     //----------------------------------------------------------------------------------------------------------------------------------//
     
     open func loadInterstitialAD(_ location: CLLocation, completion: ((_ result: Bool) -> Void)?){
-        //let adLocation =  CLLocation(latitude: 59.327730, longitude: 18.068114)  //59.327730, 18.068114
+
         deviceData.getDeviceParameters(location){
             (result: [String: AnyObject]) in
-            debugPrint("AdAdaptive Info: Device Parameters = \(result)")
+            //debugPrint("AdAdaptive Info: Device Parameters = \(result)")
             let api_call_parameters = result
             Alamofire.request(self.MY_AD_PLATFORM.AD, parameters: api_call_parameters).responseJSON {
                 response in switch response.result {
                 case .success(let ad_response_JSON):
-                    debugPrint("AdADaptive Info: Interstitial AD found: \(ad_response_JSON)")
+                    //debugPrint("AdADaptive Info: Interstitial AD found: \(ad_response_JSON)")
+                    debugPrint("AdADaptive Info: Interstitial AD found")
                     
                     //status code 204 is returned if the ad query is valid but no ad that fulfills the criteria has been found
                     if (response.response?.statusCode)! == 204{
@@ -121,13 +113,14 @@ class AdAdaptiveInterstitial: UIViewController {
                                 
                                 //let new_scaled_ad_url = self.scaleAdImage(ad_url)
                                 //self.loadADImage(new_scaled_ad_url)
-                                debugPrint("AdAdaptive Info: Inetrstitial AD URL: \(ad_url)")
+                                
+                                //debugPrint("AdAdaptive Info: Interstitial AD URL: \(ad_url)")
                                 
                                 //self.loadADImage(ad_url, completion:nil)
                                 self.loadADImageWithAlamofireImage(ad_url)
 
                                 if let ad_call_to_action = firstAD["click_through_url"] as? String {
-                                    debugPrint("AdADaptive Info: Ad Call to Action \(ad_call_to_action)")
+                                    //debugPrint("AdADaptive Info: Ad Call to Action \(ad_call_to_action)")
                                     self.ad_action = URL(string: ad_call_to_action)
                                 }
                             }
@@ -152,7 +145,7 @@ class AdAdaptiveInterstitial: UIViewController {
     //----------------------------------------------------------------------------------------------------------------------------------//
     private func loadADImage(_ ad_image_url: String, completion: ((_ result: Bool) -> Void)?){
         if let url =  URL(string: ad_image_url){
-            debugPrint("AdADaptive Info: Retrieve Interstitial AD from \(url)")
+            //debugPrint("AdADaptive Info: Retrieve Interstitial AD from \(url)")
             if let data = try? Data(contentsOf: url) {
                 adImage?.image = UIImage(data: data)
                 adImage?.setNeedsDisplay()

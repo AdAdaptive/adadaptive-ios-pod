@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdAdaptiveInterstitial" customModule="AdAdaptiveSDK">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdAdaptiveInterstitial" customModule="AdAdaptive">
             <connections>
                 <outlet property="adImage" destination="fc3-tz-92X" id="UcF-Ka-Dig"/>
                 <outlet property="closeBtn" destination="rxw-v3-fBX" id="EA4-2a-Vu7"/>

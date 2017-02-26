@@ -15,7 +15,7 @@ struct AD_PLATFORM {
     let AD          :String
     let BEACON      :String
     let CAMPAIGN    :String
-    let SDK_VER     :String = "V.1.1.0"
+    let SDK_VER     :String = "V.0.1.1"
 }
 
 extension AD_PLATFORM {
